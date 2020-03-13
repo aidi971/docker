@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.eddie.docker.mapper.CategoryMapper">
+    <select id="getAllCategories" resultMap="cn.eddie.docker.bean.Category">
+        select * from category
+    </select>
+    <delete id="deleteCategoryByIds">
+        delete from category where id in
+        <foreach collection="ids" separator="," open="(" close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="updateCategoryById" parameterType="cn.eddie.docker.bean.Category">
+        update category set catename=#{catename} where id=#{id}
+    </update>
+    <insert id="addCategory" parameterType="cn.eddie.docker.bean.Category">
+        insert into category set date=#{date},cateName=#{cateName}
+    </insert>
+</mapper>
